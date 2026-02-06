@@ -21,18 +21,35 @@ class FormValidator {
         errorElement.classList.remove(this._errorClass);
     }
 
-    _checkInputValidity(inputElement) {
-        if (!inputElement.validity.valid) {
-         showInputError(
-            this._formEl,
-            inputElement,
-            inputElement.validationMessage,
-            this,
-        );
-        } else {
-            hideInputError(this._formEl, inputElement, this);
-        }
+     _showInputError(inputElement, errorMessage) {
+        const errorElementId = `#${inputElement.id}-error`;
+        const errorElement = this._formEl.querySelector(errorElementId);
+        errorElement.textContent = errorMessage;
+        errorElement.classList.add(this._errorClass);
     }
+
+    _hideInputError(inputElement) {
+        const errorElementId = `#${inputElement.id}-error`;
+        const errorElement = this._formEl.querySelector(errorElementId);
+        errorElement.classList.remove(this._errorClass);
+    }
+
+    _showInputError(inputElement, errorMessage) {
+        const errorElementId = `#${inputElement.id}-error`;
+        const errorElement = this._formEl.querySelector(errorElementId);
+        inputElement.classList.add(this._inputErrorClass);
+        errorElement.textContent = errorMessage;
+        errorElement.classList.add(this._errorClass);
+    }
+
+    _checkInputValidity(inputElement) {
+    if (!inputElement.validity.valid) {
+        this._showInputError(inputElement, inputElement.validationMessage);  // ✅
+    } else {
+        this._hideInputError(inputElement);  // ✅
+    }
+    }
+
 
     _hasInvalidInput(inputList) {
         return inputList.some((inputElement) => {
