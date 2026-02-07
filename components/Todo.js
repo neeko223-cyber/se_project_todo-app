@@ -30,8 +30,7 @@ class Todo {
 
         const todoNameEl = this._todoElement.querySelector(".todo__name");
         const todoDate = this._todoElement.querySelector(".todo__date");
-        const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
-
+       
         todoNameEl.textContent = this._data.name;
         const dueDate = new Date(this._data.date);
         if (!isNaN(dueDate)) {
