@@ -21,14 +21,6 @@ class FormValidator {
         errorElement.classList.remove(this._errorClass);
     }
 
-    _showInputError(inputElement, errorMessage) {
-        const errorElementId = `#${inputElement.id}-error`;
-        const errorElement = this._formEl.querySelector(errorElementId);
-        inputElement.classList.add(this._inputErrorClass);
-        errorElement.textContent = errorMessage;
-        errorElement.classList.add(this._errorClass);
-    }
-
     _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
         this._showInputError(inputElement, inputElement.validationMessage);
@@ -58,7 +50,6 @@ class FormValidator {
         this._inputList = Array.from(this._formEl.querySelectorAll(this._inputSelector));
         this._submitButton = this._formEl.querySelector(this._submitButtonSelector);
     
-        this._toggleButtonState(this._inputList, this._submitButton);
         this._inputList.forEach((inputElement) => {
              inputElement.addEventListener("input", () => {
                this._checkInputValidity(inputElement);
